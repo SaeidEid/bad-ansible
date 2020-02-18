@@ -10,9 +10,16 @@
 
 - name: initialize postgres
   command: postgresql-setup initdb
-  args:
-    creates: /var/lib/pgsql/initdb.log #shortcut to the stat module
+  # when: not '/var/lib/pgsql/initdb.log' is file #THIS IS CHECKING ON CONTROL HOST
+  # args:
+  #   creates: /var/lib/pgsql/initdb.log #shortcut to the stat module
   # when: not r_pgsql_initdb_log.stat.exists
+  register: r_pgsql_initdb
+  failed_when:
+    - r_pgsql_initdb.rc != 0
+    - r_pgsql_initdb.rc != 'Data directory is not empty!'
+  changed_when:
+    - r_pgsql_initdb.rc == 0
 
 - name: start and enable postgres
   service:
