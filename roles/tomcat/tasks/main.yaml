@@ -1,14 +1,14 @@
 ---
-- name: "install {{ software }}"
+- name: install {{ software }}
   yam:
     name: "{{ software }}"
     state: latest
-- name: "enable {{ software }} at boot"
+- name: enable {{ software }} at boot
   service:
     name: "{{ software }}"
     enabled: yes
 
-- name: "create {{ software }} default directory"
+- name: create {{ software }} default directory
   file:
     path: "{{ tomcat_directory }}"
     state: directory
@@ -19,7 +19,7 @@
     dest: "{{ tomcat_directory }}/index.html"
     mode: 0644
 
-- name: "restart {{ software }}"
+- name: restart {{ software }}
   service:
     name: "{{ software }}"
     state: restarted
