@@ -13,12 +13,7 @@
 #   Bare variables
 #   No use of handlers
 
-- name: configuration
-  hosts: all
-  gather_facts: false # remove later! speeds up testing
-  become: true
-  roles:
-    - name: configure
+- import_playbook: base-configuration.yaml
 
 - name: deploy haproxy
   hosts: frontends
@@ -40,6 +35,9 @@
   hosts: appdbs
   tasks:
   - name: install postgres
+    include_role: install_postgres
+    when: >-
+      'appdbs' in group_names
     yum:
       name: postgresql-server
       state: latest

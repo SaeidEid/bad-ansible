@@ -1,0 +1,4 @@
+---
+- name: configure yum
+  include_tasks: configure-yum.yaml
+  when: base_configuration_configure_yum | bool
