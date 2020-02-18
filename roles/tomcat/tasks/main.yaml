@@ -6,7 +6,7 @@
 - name: enable {{ software }} at boot
   service:
     name: "{{ software }}"
-    enabled: yes
+    enabled: true
 
 - name: create {{ software }} default directory
   file:

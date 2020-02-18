@@ -6,7 +6,7 @@
 - name: enable {{ software }}
   service:
     name: "{{ software }}"
-    enabled: yes
+    enabled: true
 - name: configure {{ software }}
   template:
     src: haproxy.cfg.j2
