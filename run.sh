@@ -1,0 +1,1 @@
+ansible-playbook main.yml -e GUID=b13e --vault-password-file=./ans.txt
