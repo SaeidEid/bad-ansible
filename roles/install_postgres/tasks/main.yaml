@@ -17,7 +17,7 @@
   register: r_pgsql_initdb
   failed_when:
     - r_pgsql_initdb.rc != 0
-    - r_pgsql_initdb.rc != 'Data directory is not empty!'
+    - r_pgsql_initdb.stdout != 'Data directory is not empty!'
   changed_when:
     - r_pgsql_initdb.rc == 0
 
