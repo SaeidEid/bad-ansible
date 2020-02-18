@@ -1,0 +1,2 @@
+software: tomcat
+tomcat_directory: /usr/share/tomcat/webapps/ROOT

@@ -1,0 +1,25 @@
+---
+- name: "install {{ software }}"
+  yam:
+    name: "{{ software }}"
+    state: latest
+- name: "enable {{ software }} at boot"
+  service:
+    name: "{{ software }}"
+    enabled: yes
+
+- name: "create {{ software }} default directory"
+  file:
+    path: "{{ tomcat_directory }}"
+    state: directory
+
+- name: copy static index.html to tomcat directory
+  template:
+    src: index.html.j2
+    dest: "{{ tomcat_directory }}/index.html"
+    mode: 0644
+
+- name: "restart {{ software }}"
+  service:
+    name: "{{ software }}"
+    state: restarted
