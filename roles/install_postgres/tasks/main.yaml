@@ -2,20 +2,20 @@
   yum:
     name: postgresql-server
     state: latest
-- name: enable apache at boot
+
+# - name: check for file if exist
+#   stat:
+#     path: /var/lib/pgsql/initdb.log
+#   register: r_pgsql_initdb_log
+
+- name: initialize postgres
+  command: postgresql-setup initdb
+  args:
+    creates: /var/lib/pgsql/initdb.log #shortcut to the stat module
+  # when: not r_pgsql_initdb_log.stat.exists
+
+- name: start and enable postgres
   service:
     name: postgresql
-    enabled: yes
-- name: tell user to finish setting up postgres
-  debug:
-    msg: "Either uncomment the postgres setup or manually login and initialize"
-
-# only run the next 2 tasks once!
-# - name: initilize postgres
-#   command: postgresql-setup initdb
-# - name: initilize postgres some more
-#   command: chkconfig postgresql on
-- name: start postgres
-  service:
-    name: postgresql.service
+    enabled: true
     state: started
