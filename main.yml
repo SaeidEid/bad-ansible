@@ -35,9 +35,6 @@
   hosts: appdbs
   tasks:
   - name: install postgres
-    include_role: install_postgres
-    when: >-
-      'appdbs' in group_names
     yum:
       name: postgresql-server
       state: latest
