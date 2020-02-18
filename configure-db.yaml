@@ -1,0 +1,6 @@
+- name: configure db
+  gather_facts: false
+  become: true
+  hosts: appdbs
+  roles:
+    - name: install_postgres

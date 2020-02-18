@@ -1,0 +1,6 @@
+- name: configure frontend
+  hosts: frontends
+  gather_facts: false # remove later! speeds up testing
+  become: true
+  roles:
+    - name: haproxy

@@ -1,0 +1,8 @@
+
+- name: configure backend
+  hosts: apps
+  gather_facts: false
+  become: true
+  roles:
+    - name: tomcat
+    - name: apache
